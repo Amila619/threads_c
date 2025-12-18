@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
         return 1;
     }
     
-    // wait for threads
+    // wait for threads and get result if needed
     if(pthread_join(t1, NULL) != 0)
     {
         return 2;
@@ -46,3 +46,34 @@ int main(int argc, char* argv[])
     
     return 0;
 }
+
+/*
+
+    
+    void* demo(void* n)
+    {
+        printf("Starting thread %d\n", *(int*)n);
+        sleep(3);
+        printf("Thread %d ended\n", *(int*)n);
+    }
+
+
+    int main()
+    {
+        pthread_t t2;
+        int y = 1;
+
+        if(pthread_create(&t2, NULL, &demo, &y) != 0)
+        {
+            return 2;
+        }
+
+        if(pthread_join(t2, NULL) != 0)
+        {
+            return 1;
+        }
+
+        return 0;
+    }
+
+*/

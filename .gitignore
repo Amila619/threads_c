@@ -14,5 +14,7 @@
 
 # folders
 executables/
-
 *.s
+
+# other
+test.c

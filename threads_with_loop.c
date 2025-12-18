@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pthread.h>
+#define  NO_OF_THREADS 4
 
 /*
     A mutex is like a lock — only one thread can access the shared resource at a time.
@@ -37,28 +38,24 @@ void* routine()
 int main(int argc, char* argv[])
 {
 
-    pthread_t t1, t2;
+    int i;
+    pthread_t th[NO_OF_THREADS];
     pthread_mutex_init(&mutex, NULL);
 
-    if(pthread_create(&t1, NULL, &routine, NULL) != 0)
+    for (i = 0 ; i < NO_OF_THREADS ; i++)
     {
-        return 1;
+        if(pthread_create(&th[i], NULL, &routine, NULL) != 0)
+        {
+            return 1;
+        }    
     }
-    
-    if(pthread_create(&t2, NULL, &routine, NULL) != 0)
-    {
-        return 1;
-    }
-    
-    // wait for threads
-    if(pthread_join(t1, NULL) != 0)
-    {
-        return 2;
-    }
-    
-    if(pthread_join(t2, NULL) != 0)
-    {
-        return 2;
+
+    for (i = 0 ; i < NO_OF_THREADS ; i++)
+    {    
+        if(pthread_join(th[i], NULL) != 0)
+        {
+            return 2;
+        }
     }
     
     pthread_mutex_destroy(&mutex);
