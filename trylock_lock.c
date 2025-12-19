@@ -15,7 +15,6 @@
     | Return value if locked | waits (no return yet)       | returns `EBUSY`             |
     | Use case               | Must enter critical section | Try, but don’t wait         |
 
-
 */
 
 pthread_mutex_t mutex;
