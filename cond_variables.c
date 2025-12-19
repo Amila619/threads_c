@@ -48,7 +48,8 @@ void* fuel_filling(void* arg)
         fuel += 15;
         printf("Filling fuel... %d\n", fuel);
         pthread_mutex_unlock(&mutexFuel);
-        pthread_cond_signal(&condFuel);
+        pthread_cond_signal(&condFuel); // signals only one threads that are waiting on the condition
+        // pthread_cond_broadcast(&condFuel); // signals all the threads that are waiting on the condition
         sleep(1);
     }
 } 
