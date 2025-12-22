@@ -45,6 +45,8 @@
         - Mutex = bathroom key — only one person can go in at a time.
         - Semaphore = tickets for a ride — a few people can go in together until tickets run out.
 
+    sem_post() is the signal, and sem_wait() is the wait.
+
 */ 
 
 sem_t semaphore;
